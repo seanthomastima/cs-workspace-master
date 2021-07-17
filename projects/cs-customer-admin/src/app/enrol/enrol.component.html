@@ -1,0 +1,32 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Header-->
+  <div class="column">
+
+    <div class="heading margin-bottom-1em flex-start">
+      Process Enrolment Request
+    </div>
+
+    <div class="text margin-bottom-1em">
+      Please wait while your enrolment request is processed.
+    </div>
+
+    <div class="text margin-bottom-0pt5em"
+         *ngFor="let message of displayMessages">
+      {{message}}
+    </div>
+
+    <div *ngIf="(displayNamePasswordForm$ | async) === true">
+
+      <cs-name-password
+        [name]="initialRecipientName"
+        (formValues)="getNamePassword($event)">
+      </cs-name-password>
+
+    </div>
+
+  </div>
+
+</div>
+

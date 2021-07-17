@@ -1,0 +1,119 @@
+<div class="column pad-bottom-1em">
+
+  <!--Heading and edit link-->
+  <div class="row-left">
+
+    <label class="margin-right-1em">{{heading}}</label>
+
+    <u class="link"
+       *ngIf="!editingRoles"
+       (click)="editRoles(true)">
+      edit
+    </u>
+
+    <u class="link"
+       *ngIf="editingRoles"
+       (click)="editRoles(false)">
+      close
+    </u>
+
+  </div>
+
+  <!--Selected Roles-->
+  <div class="column width-widest min-height-20px list-border margin-bottom-1em">
+
+    <div *ngFor="let displayObject of selectedDisplayObjects">
+
+      <div [ngClass]="{'row':                 true,
+                       'hover-highlight':     editingRoles}"
+           (click)="removeDisplayObject(displayObject)">
+
+        <div class="flex-start">
+
+          <label>{{displayObject.displayName}}</label>
+
+        </div>
+
+        <div class="flex-end"
+             *ngIf="editingRoles">
+
+          <u class="link">
+            remove
+          </u>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--Display if editingRoles-->
+  <div *ngIf="editingRoles">
+
+    <!--Roles / RoleGroups Tabs-->
+    <div class="tab-button-container background-white">
+
+      <!--Roles Panel-->
+      <button [ngClass]="{'tab-button-selected':  selectedTab === 'Roles',
+                          'tab-button':           selectedTab !== 'Roles'}"
+              (click)="setSelectedTab('Roles')">
+        Roles
+      </button>
+
+    </div>
+
+    <!--Roles Panel-->
+    <div class="tab-panel-container"
+         *ngIf="selectedTab === 'Roles'">
+
+      <div class="column">
+
+        <div class="row-left margin-bottom-0pt5em">
+
+          <label class="margin-right-1em">Available Roles</label>
+
+          <input class="input"
+                 type="text"
+                 placeholder="Enter filter"
+                 [(ngModel)]="filter"
+                 (ngModelChange)="filterDisplayObjects()">
+
+        </div>
+
+        <!--filteredDisplayObjects-->
+        <div class="column width-widest min-height-20px list-border margin-bottom-1em">
+
+          <div *ngFor="let displayObject of filteredDisplayObjects">
+
+            <div class="row hover-highlight"
+                 (click)="addDisplayObject(displayObject)">
+
+              <div class="flex-start">
+
+                <label>{{displayObject.displayName}}</label>
+
+              </div>
+
+              <div class="flex-end">
+
+                <u class="link">
+                  add
+                </u>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

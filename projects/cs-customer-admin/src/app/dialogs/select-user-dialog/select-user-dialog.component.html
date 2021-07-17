@@ -1,0 +1,48 @@
+<div class="main-div">
+
+  <div class="row-left heading">
+    Select User
+  </div>
+
+  <div class="width-medium margin-bottom-1em margin-top-1em">
+
+      <input class="input"
+             type="text"
+             placeholder="Filter by User Name"
+             [(ngModel)]="filter"
+             (ngModelChange)="filterList()"
+             (change)="filterList()">
+
+  </div>
+
+  <!--User List-->
+  <div class="column">
+
+    <div>
+
+      <div [ngClass]="{'item-header-small':           user?.FSKey !== item.FSKey,
+                       'item-header-selected-small':  user?.FSKey === item.FSKey}"
+           *ngFor="let item of filteredUsers"
+           (click)="onClick(item)">
+
+        <a>{{item.name}}</a>
+
+      </div>
+
+      <div class="row-right margin-top-1em">
+
+      <button class="button-plain radius-6 margin-right-1em"
+              *ngIf="user"
+              (click)="select()">
+        Select
+      </button>
+
+      <button class="button-plain radius-6"
+              (click)="cancel()">
+        Cancel
+      </button>
+
+    </div>
+  </div>
+
+</div>

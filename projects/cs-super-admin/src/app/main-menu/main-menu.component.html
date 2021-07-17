@@ -1,0 +1,51 @@
+<div id="main"
+     class="header flex-container">
+
+  <div class="flex-start">
+
+    <fa-icon *ngIf="!displaySideBar"
+             (click)="toggleSideBar()"
+             [icon]="faBars" size="2x"></fa-icon>
+
+  </div>
+
+  <div class="flex-container align-items-centre">
+    Super Admin
+  </div>
+
+  <div class="flex-end align-items-centre">
+    <span *ngIf="(signInContext$ | async).signedIn" class="margin-left-1em">{{(signInContext$ | async).administrator.name}}</span>
+  </div>
+
+</div>
+
+<div id="mySidebar" class="sidebar">
+
+  <!--If Signed In-->
+  <div *ngIf="(signInContext$ | async).signedIn">
+
+    <a *ngIf="(signInContext$ | async).signedIn"
+       class="closeButton"
+       (click)="toggleSideBar()">×</a>
+
+    <a routerLink="/administrators">Administrators</a>
+
+    <a routerLink="/customers">Customers</a>
+
+    <a routerLink="/email-templates">Email Templates</a>
+
+    <a routerLink="/profile">Profile</a>
+
+    <a (click)="signOut()">Sign Out</a>
+
+  </div>
+
+  <!--If not Signed In-->
+  <div *ngIf="!(signInContext$ | async).signedIn">
+
+    <a routerLink="/sign-in">Sign In</a>
+
+  </div>
+
+
+</div>

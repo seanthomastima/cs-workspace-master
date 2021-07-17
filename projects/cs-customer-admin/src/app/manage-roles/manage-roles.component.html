@@ -1,0 +1,215 @@
+<div #main
+     class="main-div pad-1em">
+
+  <!--Header-->
+  <div class="row">
+
+    <div class="heading margin-bottom-1em flex-start">
+      Manage Roles
+    </div>
+
+    <div class="row align-content-centre"
+         *ngIf="fuService.pageState === fuService.pageStateOptions.VIEW">
+
+      <!--Filter-->
+        <div class="flex-end align-items-centre margin-right-2em">
+
+          <label class="margin-right-1em">Filter</label>
+
+          <input class="input width-medium"
+                 type="text"
+                 placeholder="Filter by Role or Owner"
+                 [(ngModel)]="fuService.filter"
+                 (ngModelChange)="fuService.updateFilteredList()">
+
+        </div>
+
+      <!--Add New Role button-->
+      <div class="flex-end align-items-centre margin-right-2em">
+
+        <button class="button-plain radius-6"
+                (click)="addNew()">
+          Add New Role
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="column">
+
+    <div [ngClass]="{'item-header':             fuService.item.FSKey !== item.FSKey,
+                     'item-header-selected':    fuService.item.FSKey === item.FSKey}"
+         *ngFor="let item of fuService.filteredItems"
+         (click)="edit(item)">
+
+      <div class="heading2">
+        {{item.role.name}}
+      </div>
+
+      <!--Panel Content-->
+      <div [ngClass]="{'main-div border-bottom': fuService.item.role.FSKey !== item.role.FSKey}"
+           *ngIf="fuService.panelOpen && fuService.item.role.FSKey === item.role.FSKey">
+
+        <div class="flex-container">
+
+          <div class="column">
+
+            <form autocomplete="off"
+                  novalidate
+                  [formGroup]="fuService.fg">
+
+              <!-- Role Name-->
+              <fu-fg-input
+                [fg]="fuService.fg"
+                [controlName]="'name'"
+                [label]="'Name'"
+                [inputValue]="fuService.item.role.name">
+              </fu-fg-input>
+
+              <!-- Owner Name-->
+              <div class="width-medium margin-bottom-1em">
+
+                <div class="column">
+
+                  <label class="heading3">Owner</label>
+
+                  <div class="row"
+                       *ngIf="fuService.item.ownerName">
+
+                    <label class="width-wide">
+                      {{fuService.item.ownerName}}
+                    </label>
+
+                    <u class="link"
+                       (click)="removeOwner()">
+                      remove
+                    </u>
+
+                  </div>
+
+                  <div class="row"
+                       *ngIf="!fuService.item.ownerName">
+
+                    <u class="link margin-right-1em"
+                       (click)="selectOwner()">
+                      select
+                    </u>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- Managing Role Name-->
+              <div class="width-medium margin-bottom-1em">
+
+                <div class="column">
+
+                  <label class="heading3">Managing Role</label>
+
+                  <div class="row"
+                       *ngIf="fuService.item.managingRoleName">
+
+                    <label class="width-wide">
+                      {{fuService.item.managingRoleName}}
+                    </label>
+
+                    <u class="link"
+                       (click)="removeManagingRole()">
+                      remove
+                    </u>
+
+                  </div>
+
+                  <div class="row"
+                       *ngIf="!fuService.item.managingRoleName">
+
+                    <u class="link margin-right-1em"
+                       (click)="selectManagingRole()">
+                      select
+                    </u>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!--Active-->
+              <fu-fg-checkbox
+                [fg]="fuService.fg"
+                [label]="'Active'"
+                [controlName]="'active'"
+                [inputValue]="fuService.item.role.active">
+              </fu-fg-checkbox>
+
+              <!-- Select and Display Team-->
+              <div class="width-medium margin-bottom-1em">
+
+                <div class="column">
+
+                  <label class="heading3">Team</label>
+
+                  <div class="row"
+                       *ngIf="fuService.item.teamName">
+
+                    <label class="width-wide">
+                      {{fuService.item.teamName}}
+                    </label>
+
+                    <u class="link"
+                       (click)="removeTeam()">
+                      remove
+                    </u>
+
+                  </div>
+
+                  <div>
+
+                    <u class="link margin-right-1em"
+                       *ngIf="!fuService.item.teamName"
+                       (click)="selectTeam()">
+                      select
+                    </u>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!--Has Checklists-->
+              <fu-fg-checkbox
+                [fg]="fuService.fg"
+                [label]="'Has Checklists'"
+                [controlName]="'hasChecklists'"
+                [inputValue]="fuService.item.role.hasChecklists">
+              </fu-fg-checkbox>
+
+            </form>
+
+          </div>
+
+        </div>
+
+        <!--Error errorMessages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <fu-fg-buttons
+          [fuService]="fuService">
+        </fu-fg-buttons>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

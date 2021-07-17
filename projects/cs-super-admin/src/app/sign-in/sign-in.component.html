@@ -1,0 +1,38 @@
+<div class="flex-container">
+
+  <div class="panel-container column margin-top-2em centre">
+
+    <!--Email Address-->
+    <fu-input
+      [label]="'Email'"
+      [placeHolder]="'(case sensitive)'"
+      [value]="emailAddress"
+      (changes)="updateEmailAddress($event)">
+    </fu-input>
+
+    <!--Password-->
+    <fu-input
+      [label]="'Password'"
+      [inputType]="'password'"
+      [value]="password"
+      (changes)="updatePassword($event)">
+    </fu-input>
+
+    <!--Error errorMessages-->
+    <sc-error-message
+      [errorMessages]="fuService.errorMessages">
+    </sc-error-message>
+
+    <!--Buttons-->
+    <div class="row-right">
+
+      <fu-button
+        [label]="'Sign In'"
+        (click)="signIn()">
+      </fu-button>
+
+    </div>
+
+  </div>
+
+</div>

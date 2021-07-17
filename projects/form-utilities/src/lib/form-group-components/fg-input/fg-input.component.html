@@ -1,0 +1,15 @@
+<div class="flex-container width-wide column pad-bottom-1em">
+
+  <label>{{label}}</label>
+
+    <input class="input"
+           [type]=inputType
+           [readonly]="readOnly"
+           placeholder="{{placeHolder}}"
+           [(ngModel)]="inputValue"
+           (keydown)="stopEnterEventBubbling($event)"
+           (ngModelChange)="inputChanged()">
+
+</div>
+
+

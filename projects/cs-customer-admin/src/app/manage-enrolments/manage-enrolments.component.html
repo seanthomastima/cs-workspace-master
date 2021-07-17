@@ -1,0 +1,90 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Header-->
+  <div class="heading margin-bottom-1em flex-start">
+    Manage Enrolments
+  </div>
+
+  <fu-checkbox
+    [value]="(displayCompletedEnrolments$ | async)"
+    [label]="'Show Completed Enrolment Requests'"
+    (changes)="setDisplayCompletedEnrolments($event)">
+  </fu-checkbox>
+
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               [style.height.px]="(windowSize$ | async)?.height * 0.6"
+                               class="virtual-scroll-viewport panel-container margin-right-2em">
+
+    <div *cdkVirtualFor="let item of fuService.items"
+         [ngClass]="{'item-header':             fuService.item?.FSKey !== item?.FSKey,
+                     'item-header-selected':    fuService.item?.FSKey === item?.FSKey}"
+         (click)="edit(item)">
+
+      <div class="row">
+
+        <div class="heading2 flex-start">
+          {{item?.enrolmentRequest.recipientEmailAddress}}
+        </div>
+
+        <div class="heading2 flex-end">
+          {{item?.enrolmentRequest.enrolmentType}}
+        </div>
+
+      </div>
+
+      <!--Panel Content-->
+      <div class="column"
+           *ngIf="fuService.panelOpen && fuService.item.enrolmentRequest.FSKey === item?.enrolmentRequest.FSKey">
+
+        <!--Form fields-->
+        <form autocomplete="off"
+              novalidate
+              [formGroup]="fuService.fg">
+
+          <fu-input
+            [controlName]="'name'"
+            [label]="'Name'"
+            [readOnly]="true"
+            [value]="fuService.item.enrolmentRequest.enrolmentType">
+          </fu-input>
+
+          <fu-input
+            [controlName]="'createdTimeStampString'"
+            [label]="'Created'"
+            [readOnly]="true"
+            [value]="fuService.item.createdTimeStampString">
+          </fu-input>
+
+          <div *ngIf="fuService.item.enrolmentRequest.enrolmentCompleted">
+
+          <fu-input
+            [controlName]="'enrolmentCompletedTimeStamp'"
+            [label]="'Completed'"
+            [readOnly]="true"
+            [value]="fuService.item.enrolmentCompletedTimeStampString">
+          </fu-input>
+
+          </div>
+
+        </form>
+
+        <!--errorMessages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <fu-fg-buttons
+          [fuService]="fuService">
+        </fu-fg-buttons>
+
+      </div>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+</div>
+
+

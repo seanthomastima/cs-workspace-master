@@ -1,0 +1,44 @@
+<div #main class="panel-container column width-wide centre margin-top-2em">
+
+  <sc-generic-form
+    *ngIf="displayMode === 'PROFILE'"
+    [showCloseButton]="false"
+    [heading]="'Manage Profile'"
+    [saveFunction]="saveProfile"
+    [cancelFunction]="cancelProfile"
+    [formControls]="formControlsProfile"
+    [errorMessages]="errorMessages"
+    [waiting]="waiting"
+    (changed)="setFormChanged($event)">
+  </sc-generic-form>
+
+  <sc-generic-form
+    *ngIf="displayMode === 'PASSWORD'"
+    [showCloseButton]="false"
+    [heading]="'Update Password'"
+    [saveFunction]="savePassword"
+    [cancelFunction]="cancelPassword"
+    [formControls]="formControlsPassword"
+    [errorMessages]="errorMessages"
+    [waiting]="waiting"
+    (changed)="setFormChanged($event)">
+  </sc-generic-form>
+
+  <div class="row-right"
+       *ngIf="!formChanged">
+
+    <fu-button
+      *ngIf="displayMode === 'PROFILE'"
+      [label]="'Update Password'"
+      (click)="setDisplayMode('PASSWORD')">
+    </fu-button>
+
+    <fu-button
+      *ngIf="displayMode === 'PASSWORD'"
+      [label]="'Update Profile'"
+      (click)="setDisplayMode('PROFILE')">
+    </fu-button>
+
+  </div>
+
+</div>

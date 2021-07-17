@@ -1,0 +1,50 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "cs-shared": [
+        "dist/cs-shared"
+      ],
+      "cs-shared/*": [
+        "dist/cs-shared/*"
+      ],
+      "shared-components": [
+        "dist/shared-components/shared-components",
+        "dist/shared-components"
+      ],
+      "form-utilities": [
+        "dist/form-utilities/form-utilities",
+        "dist/form-utilities"
+      ],
+      "form-utilities-single": [
+        "dist/form-utilities-single/form-utilities-single",
+        "dist/form-utilities-single"
+      ],
+      "cs-shared-components": [
+        "dist/cs-shared-components/cs-shared-components",
+        "dist/cs-shared-components"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

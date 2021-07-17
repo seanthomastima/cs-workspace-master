@@ -1,0 +1,60 @@
+<div class="panel-container column width-wide centre">
+
+  <fu-heading1
+    [text]="heading">
+  </fu-heading1>
+
+  <form autocomplete="off"
+        novalidate
+        [formGroup]="fg">
+
+    <fu-fg-input
+      [fg]="fg"
+      [label]="'Name'"
+      [controlName]="'name'">
+    </fu-fg-input>
+
+    <fu-fg-input
+      [fg]="fg"
+      [label]="'Email Address'"
+      [inputType]="'email'"
+      [controlName]="'emailAddress'">
+    </fu-fg-input>
+
+    <fu-fg-input
+      [fg]="fg"
+      [label]="'Password'"
+      [inputType]="'password'"
+      [controlName]="'password1'">
+    </fu-fg-input>
+
+    <fu-fg-input
+      [fg]="fg"
+      [label]="'Password'"
+      [inputType]="'password'"
+      [controlName]="'password2'">
+    </fu-fg-input>
+
+  </form>
+
+  <!--Error errorMessages-->
+  <sc-error-message
+    [errorMessages]="errorMessages">
+  </sc-error-message>
+
+  <!--Buttons-->
+  <div class="row-right">
+
+    <fu-button
+      [label]="'Save'"
+      (click)="save()">
+    </fu-button>
+
+    <fu-button
+      [label]="'Cancel'"
+      (click)="cancel()">
+    </fu-button>
+
+  </div>
+
+</div>

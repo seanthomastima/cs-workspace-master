@@ -1,0 +1,14 @@
+<div class="flex-container width-wide column pad-bottom-1em">
+
+  <label>{{label}}</label>
+
+  <textarea #textarea
+            [readonly]="readonly"
+            autosize
+            class="message-text-area-resize"
+            placeholder="{{placeHolder}}"
+            (keyup)="inputChanged($event)">{{inputValue}}</textarea>
+
+</div>
+
+

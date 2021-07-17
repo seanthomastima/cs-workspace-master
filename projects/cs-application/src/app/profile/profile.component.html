@@ -1,0 +1,71 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <div *ngIf="fuService.pageState !== fuService.pageStateOptions.ERROR && !updatingPassword"
+       class="panel-container column margin-top-1em centre">
+
+      <div class="heading margin-bottom-1em">
+        Profile
+      </div>
+
+    <!--Panel Content-->
+    <div class="column margin-top-1em">
+
+        <!--Edit controls-->
+        <div class="column">
+
+          <form autocomplete="off"
+                novalidate
+                [formGroup]="fuService.fg">
+
+            <fu-input
+              [fg]="fuService.fg"
+              [controlName]="'name'"
+              [label]="'Name'"
+              [inputValue]="fuService.item.name">
+            </fu-input>
+
+            <fu-input
+              [fg]="fuService.fg"
+              [controlName]="'emailAddress'"
+              [label]="'Email Address'"
+              [inputType]="'email'"
+              [inputValue]="fuService.item.emailAddress">
+            </fu-input>
+
+          </form>
+
+        </div>
+
+      <!--Error Messages-->
+      <sc-error-message-display
+        [errorMessages]="fuService.errorMessages">
+      </sc-error-message-display>
+
+      <!--Buttons-->
+      <div class="row-right">
+
+        <fu-fg-buttons-single
+          [fuService]="fuService">
+        </fu-fg-buttons-single>
+
+        <button class="button-plain radius-6 margin-right-1em"
+                *ngIf="!fuService.changes"
+                (click)="updatePassword(true)">
+          Update Password
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <update-password *ngIf="updatingPassword"
+                   (passwordUpdated)="updatePassword(false)">
+  </update-password>
+
+</div>
+
+
+

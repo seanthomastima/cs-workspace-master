@@ -1,0 +1,110 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Header-->
+  <div class="row">
+
+    <div class="heading margin-bottom-1em flex-start">
+      Manage Administrators
+    </div>
+
+    <!--Buttons-->
+    <div class="flex-end align-items-centre margin-right-2em"
+         *ngIf="displayMode === 'VIEW' && fuService.pageState === fuService.pageStateOptions.VIEW">
+
+      <button class="button-plain radius-6 margin-left-1em"
+              (click)="switchLayoutToAddUser()">
+        Add Administrator
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               [style.height.px]="(windowSize$ | async)?.height * 0.6"
+                               class="virtual-scroll-viewport panel-container margin-right-2em"
+                               *ngIf="displayMode === 'VIEW'">
+
+    <div *cdkVirtualFor="let item of fuService.items"
+         [ngClass]="{'item-header':             fuService.item.FSKey !== item?.FSKey,
+                     'item-header-selected':    fuService.item.FSKey === item?.FSKey}"
+         (click)="edit(item)">
+
+      <div class="heading2">
+        {{item.administrator?.name}}
+      </div>
+
+      <!--Panel Content-->
+      <div class="column"
+           *ngIf="fuService.panelOpen && fuService.item.FSKey === item?.FSKey">
+
+        <!--Form fields-->
+        <form autocomplete="off"
+              novalidate
+              [formGroup]="fuService.fg">
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [controlName]="'name'"
+            [label]="'Name'"
+            [inputValue]="fuService.item.administrator.name">
+          </fu-fg-input>
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [controlName]="'emailAddress'"
+            [inputType]="'email'"
+            [label]="'Email Address'"
+            [inputValue]="fuService.item.administrator.emailAddress">
+          </fu-fg-input>
+
+        </form>
+
+        <!--errorMessages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <fu-fg-buttons
+          [fuService]="fuService">
+        </fu-fg-buttons>
+
+      </div>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+  <!--Waiting Spinner-->
+  <sc-waiting-spinner
+    *ngIf="loading">
+  </sc-waiting-spinner>
+
+  <div class="panel-container column width-wide centre"
+       *ngIf="displayAddEmail">
+
+    <cs-send-email
+      class="margin-top-1em"
+      *ngIf="displayAddEmail"
+      [subject]="emailDetails.subject"
+      [body]="emailDetails.body"
+      [enrolmentPath]="emailDetails.enrolmentPath"
+      [enrolmentKey]="emailDetails.enrolmentKey"
+      [enrolmentRequest]="enrolmentRequest"
+      (emailSent)="emailSent($event)">
+    </cs-send-email>
+
+  </div>
+
+  <sc-display-message *ngIf="displayMode === 'ERROR'"
+                   [message]="errorMessage"
+                   [isErrorMessage]="true"
+                   (OK)="removeErrorDisplay()">
+  </sc-display-message>
+
+</div>
+
+

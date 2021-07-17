@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "consultingsupport-f2cf3"
+  },
+  "targets": {
+    "consultingsupport-f2cf3": {
+      "hosting": {
+        "cs-super-admin": [
+          "cs-super-admin"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Header-->
+  <div class="row">
+
+    <div class="heading margin-bottom-1em flex-start">
+      Manage Teams
+    </div>
+
+    <div class="row align-content-centre"
+         *ngIf="fuService.pageState === fuService.pageStateOptions.VIEW">
+
+      <!--Filter-->
+      <div class="flex-end align-items-centre margin-right-2em">
+
+        <label class="margin-right-1em">Filter</label>
+
+        <input class="input width-medium"
+               type="text"
+               placeholder="Filter Team name"
+               [(ngModel)]="fuService.filter"
+               (ngModelChange)="fuService.updateFilteredList()">
+
+      </div>
+
+      <!--Add New Role button-->
+      <div class="flex-end align-items-centre margin-right-2em">
+
+        <button class="button-plain radius-6"
+                (click)="addNew()">
+          Add New Team
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               [style.height.px]="(windowSize$ | async)?.height * 0.6"
+                               class="virtual-scroll-viewport panel-container margin-right-2em">
+
+    <div *cdkVirtualFor="let item of fuService.filteredItems"
+         [ngClass]="{'item-header':             fuService.item.FSKey !== item?.FSKey,
+                     'item-header-selected':    fuService.item.FSKey === item?.FSKey}"
+         (click)="edit(item)">
+
+      <div class="heading2 margin-bottom-1em">
+        {{item?.team.name}}
+      </div>
+
+      <!--Panel Content-->
+      <div class="column"
+           *ngIf="fuService.panelOpen && fuService.item.team.FSKey === item?.team.FSKey">
+
+        <!--Form fields-->
+        <form autocomplete="off"
+              novalidate
+              [formGroup]="fuService.fg">
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [controlName]="'name'"
+            [inputValue]="fuService.item.team.name"
+            [label]="'Name'">
+          </fu-fg-input>
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [controlName]="'description'"
+            [inputValue]="fuService.item.team.description"
+            [label]="'Description'">
+          </fu-fg-input>
+
+        </form>
+
+        <select-roles
+          [heading]="'Team Roles'"
+          [selectedRoles]="fuService.item.teamMemberRoles"
+          [signInContext]="signInContext"
+          (changed)="setSharedWithChanged($event)"
+          (updatedSelectedRoles)="setSharedWithRoles($event)"></select-roles>
+
+        <!--Error errorMessages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <fu-fg-buttons
+          [fuService]="fuService">
+        </fu-fg-buttons>
+
+      </div>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+</div>
+
+

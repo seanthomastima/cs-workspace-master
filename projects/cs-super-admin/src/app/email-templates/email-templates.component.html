@@ -1,0 +1,100 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <div class="row">
+
+    <!--Header-->
+    <fu-heading1
+      [text]="'Email Templates'">
+    </fu-heading1>
+
+    <!--Buttons-->
+    <div class="flex-end align-items-centre margin-right-2em"
+         *ngIf="fuService.pageState === fuService.pageStateOptions.VIEW">
+
+      <fu-button
+        [label]="'Add Email Template'"
+        (click)="addEmailTemplate()">
+      </fu-button>
+
+    </div>
+
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               [style.height.px]="(windowSize$ | async)?.height * 0.6"
+                               class="virtual-scroll-viewport panel-container margin-right-2em">
+
+    <div *cdkVirtualFor="let item of fuService.items"
+         [ngClass]="{'item-header':             fuService.item.FSKey !== item?.FSKey,
+                     'item-header-selected':    fuService.item.FSKey === item?.FSKey}"
+         (click)="edit(item)">
+
+      <fu-heading2
+        [text]="item?.name">
+      </fu-heading2>
+
+      <!--Panel Content-->
+      <div class="column"
+           *ngIf="fuService.panelOpen && fuService.item.FSKey === item?.FSKey">
+
+        <form autocomplete="off"
+              novalidate
+              [formGroup]="fuService.fg">
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [readOnly]="fuService.pageState !== fuService.pageStateOptions.ADD"
+            [label]="'Name'"
+            [inputValue]="item?.name"
+            [placeHolder]="'required'"
+            [controlName]="'name'">
+          </fu-fg-input>
+
+          <fu-fg-textarea
+            [fg]="fuService.fg"
+            [label]="'Description'"
+            [inputValue]="item?.description"
+            [controlName]="'description'">
+          </fu-fg-textarea>
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [label]="'Subject'"
+            [inputValue]="item?.subject"
+            [placeHolder]="'required'"
+            [controlName]="'subject'">
+          </fu-fg-input>
+
+          <fu-fg-textarea
+            [fg]="fuService.fg"
+            [label]="'Body'"
+            [inputValue]="item?.body"
+            [controlName]="'body'">
+          </fu-fg-textarea>
+
+        </form>
+
+        <!--Error errorMessages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <div class="row-right">
+
+          <fu-fg-buttons
+            [fuService]="fuService">
+          </fu-fg-buttons>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+</div>
+
+

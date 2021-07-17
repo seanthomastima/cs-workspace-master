@@ -1,0 +1,87 @@
+<fu-heading2
+  [text]="heading">
+</fu-heading2>
+
+<div *ngFor="let control of formControls">
+
+  <!--Input-->
+  <div
+    class="margin-top-1em"
+    *ngIf="control.controlType === 'input'">
+
+    <fu-input
+      [readOnly]="readOnly"
+      [controlName]="control.name"
+      [label]="control.label"
+      [value]="control.value"
+      [placeHolder]="control.placeHolder"
+      (changes)="changedControlValue($event)">
+    </fu-input>
+
+  </div>
+
+  <!--Email-->
+  <div
+    class="margin-top-1em"
+    *ngIf="control.controlType === 'email'">
+
+    <fu-input
+      [readOnly]="readOnly"
+      [controlName]="control.name"
+      [label]="control.label"
+      [value]="control.value"
+      [inputType]="'email'"
+      [placeHolder]="control.placeHolder"
+      (changes)="changedControlValue($event)">
+    </fu-input>
+
+  </div>
+
+  <!--Password-->
+  <div
+    class="margin-top-1em"
+    *ngIf="control.controlType === 'password'">
+
+    <fu-input
+      [readOnly]="readOnly"
+      [controlName]="control.name"
+      [label]="control.label"
+      [value]="control.value"
+      [inputType]="'password'"
+      [placeHolder]="control.placeHolder"
+      (changes)="changedControlValue($event)">
+    </fu-input>
+
+  </div>
+
+</div>
+
+<sc-error-message
+  [errorMessages]="errorMessages">
+</sc-error-message>
+
+<sc-waiting-spinner
+  *ngIf="waiting">
+</sc-waiting-spinner>
+
+<div class="row-right margin-top-1em">
+
+  <fu-button
+    *ngIf="formChanged"
+    [label]="'Save'"
+    (click)="saveFunction(changedValues)">
+  </fu-button>
+
+  <fu-button
+    *ngIf="formChanged"
+    [label]="'Cancel'"
+    (click)="cancel()">
+  </fu-button>
+
+  <fu-button
+    *ngIf="!formChanged && showCloseButton"
+    [label]="'Close'"
+    (click)="cancel()">
+  </fu-button>
+
+</div>

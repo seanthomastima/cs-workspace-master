@@ -1,0 +1,159 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Header-->
+  <div class="row">
+
+    <fu-heading1
+      [text]="'Customers'">
+    </fu-heading1>
+
+    <!--Buttons-->
+    <div class="flex-end align-items-centre margin-right-2em"
+         *ngIf="displayMode === 'VIEW' && fuService.pageState === fuService.pageStateOptions.VIEW">
+
+      <fu-button
+        *ngIf="displayMode === 'VIEW'"
+        [label]="'Add Customer'"
+        (click)="switchLayoutToAddCustomer()">
+      </fu-button>
+
+    </div>
+
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               [style.height.px]="(windowSize$ | async)?.height * 0.6"
+                               class="virtual-scroll-viewport panel-container margin-right-2em"
+                               *ngIf="displayMode === 'VIEW'">
+
+    <div *cdkVirtualFor="let item of fuService.items"
+         [ngClass]="{'item-header':             fuService.item.FSKey !== item?.FSKey,
+                     'item-header-selected':    fuService.item.FSKey === item?.FSKey}"
+         (click)="edit(item)">
+
+      <fu-heading2
+        [text]="item?.name">
+      </fu-heading2>
+
+      <!--Panel Content-->
+      <div class="column margin-top-1em"
+           *ngIf="fuService.panelOpen && fuService.item.FSKey === item?.FSKey">
+
+        <div class="row">
+
+          <!--Form controls-->
+          <div class="column">
+
+            <form autocomplete="off"
+                  novalidate
+                  [formGroup]="fuService.fg">
+
+              <fu-fg-input
+                [fg]="fuService.fg"
+                [label]="'Name'"
+                [inputValue]="item?.name"
+                [controlName]="'name'">
+              </fu-fg-input>
+
+              <fu-fg-input
+                [fg]="fuService.fg"
+                [label]="'Description'"
+                [inputValue]="item?.description"
+                [controlName]="'description'">
+              </fu-fg-input>
+
+              <fu-fg-input
+                [fg]="fuService.fg"
+                [label]="'Customer SignIn Key'"
+                [inputValue]="item?.customerSignInKey"
+                [controlName]="'customerSignInKey'">
+              </fu-fg-input>
+
+              <fu-fg-checkbox
+                [fg]="fuService.fg"
+                [label]="'Active'"
+                [inputValue]="item?.active"
+                [controlName]="'active'">
+              </fu-fg-checkbox>
+
+            </form>
+
+          </div>
+
+          <div class="column margin-left-2em">
+
+            <!--Administrators-->
+            <div *ngIf="(selectedCustomerAdministrators$ | async)?.length > 0"
+                 class="column margin-top-1em">
+
+              <fu-heading2
+                [text]="'Administrators'">
+              </fu-heading2>
+
+              <fu-list-of-name
+                [listOfNames]="selectedCustomerAdministrators$ | async">
+              </fu-list-of-name>
+
+            </div>
+
+            <fu-button
+              *ngIf="!displayAddEmail"
+              class="margin-top-1em"
+              [label]="'Add Customer Administrator'"
+              (click)="addEmailAddress()">
+            </fu-button>
+
+            <cs-send-email
+              class="margin-top-1em"
+              *ngIf="displayAddEmail"
+              [subject]             ="emailDetails.subject"
+              [body]                ="emailDetails.body"
+              [enrolmentPath]       ="emailDetails.enrolmentPath"
+              [enrolmentKey]        ="emailDetails.enrolmentKey"
+              [enrolmentRequest]    ="enrolmentRequest"
+              (emailSent)           ="emailSent($event)">
+            </cs-send-email>
+
+          </div>
+
+        </div>
+
+        <!--Error Messages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <div class="row-right">
+
+          <fu-fg-buttons
+            [fuService]="fuService">
+          </fu-fg-buttons>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+  <!--Loading spinner-->
+  <sc-waiting-spinner
+    *ngIf="loading">
+  </sc-waiting-spinner>
+
+  <add-customer *ngIf="displayMode === 'ADD'"
+            (formValues)="addCustomer($event)">
+  </add-customer>
+
+  <add-user *ngIf="displayMode === 'ADD_ADMINISTRATOR'"
+            [heading]="'Add Super Administrator'"
+            (formValues)="addCustomerAdministrator($event)">
+  </add-user>
+
+</div>
+
+
+

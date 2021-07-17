@@ -1,0 +1,93 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Heading-->
+  <div class="heading margin-bottom-1em">
+    My Checklists
+  </div>
+
+  <!--Main Tab Buttons-->
+  <div class="tab-button-container background-white">
+
+    <button [ngClass]="{'tab-button-selected':  mainTabSelection === 'Checklists',
+                        'tab-button':           mainTabSelection !== 'Checklists'}"
+            (click)="setMainTab('Checklists')">
+      Checklists
+    </button>
+
+    <button [ngClass]="{'tab-button-selected':  mainTabSelection  === 'RoleGroups',
+                        'tab-button':           mainTabSelection  !== 'RoleGroups'}"
+            (click)="setMainTab('RoleGroups')">
+      Role Groups
+    </button>
+
+  </div>
+
+  <!--Checklists Panel-->
+  <div class="column tab-panel-container"
+       *ngIf="mainTabSelection === 'Checklists'">
+
+    <div [ngClass]="{'item-header':             fuService.item.checklist.FSKey !== item.checklist.FSKey,
+                     'item-header-selected':    fuService.item.checklist.FSKey === item.checklist.FSKey}"
+         *ngFor="let item of fuService.items"
+         (click)="edit(item)">
+
+      <div class="heading2">
+        {{item.checklist.name}}
+      </div>
+
+      <!--Main Tab Content-->
+      <div class="tab-panel-container column"
+           *ngIf="mainTabSelection === 'Checklists' && fuService.panelOpen && fuService.item.checklist.FSKey === item.checklist.FSKey">
+
+        <form autocomplete="off"
+              novalidate
+              [formGroup]="fuService.fg">
+
+          <!--Name-->
+          <fu-input
+            [fg]="fuService.fg"
+            [controlName]="'name'"
+            [label]="'Name'"
+            [inputValue]="fuService.item.checklist.name">
+          </fu-input>
+
+          <!--Description-->
+          <fu-input
+            [fg]="fuService.fg"
+            [controlName]="'description'"
+            [label]="'Description'"
+            [inputValue]="fuService.item.checklist.description">
+          </fu-input>
+
+        </form>
+
+        <!--errorMessages-->
+        <sc-error-message-display
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message-display>
+
+        <!--Buttons-->
+        <fu-fg-buttons
+          [fuService]="fuService">
+        </fu-fg-buttons>
+
+
+      </div>
+
+    </div>
+
+    <!--Add new Checklist Button-->
+    <div class="row-left">
+
+      <button class="button-plain radius-6 margin-right-1em"
+              *ngIf="fuService.pageState === fuService.pageStateOptions.VIEW"
+              (click)="addNewChecklist()">
+        Add New Checklist
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

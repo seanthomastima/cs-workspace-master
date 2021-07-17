@@ -1,0 +1,68 @@
+<div id="main"
+     class="header flex-container">
+
+  <div class="flex-start">
+
+    <fa-icon *ngIf="!displaySideBar"
+             (click)="toggleSideBar()"
+             [icon]="faBars" size="2x"></fa-icon>
+
+  </div>
+
+  <!--Not SignedIn Heading-->
+  <div class="flex-end align-items-centre">
+    Customer Admin
+  </div>
+
+  <!--SignedIn Heading-->
+  <div *ngIf="(signInContext$ | async).signedIn"
+       class="flex-end align-items-centre">
+
+    <span>
+      {{(signInContext$ | async).customer?.name}}
+    </span>
+
+    <span class="margin-left-1em">
+      {{(signInContext$ | async).administrator.name}}
+    </span>
+
+  </div>
+
+</div>
+
+<div id="mySidebar" class="sidebar">
+
+  <!--If Signed In-->
+  <div *ngIf="(signInContext$ | async).signedIn">
+
+    <a *ngIf="(signInContext$ | async).signedIn"
+       class="closeButton"
+       (click)="toggleSideBar()">×</a>
+
+    <a routerLink="/administrators">Administrators</a>
+
+    <a routerLink="/manage-users">Users</a>
+
+    <a routerLink="/manage-roles">Roles</a>
+
+    <a routerLink="/manage-teams">Teams</a>
+
+    <a routerLink="/enrolments">Enrolments</a>
+
+    <a routerLink="/customer-details">Customer Details</a>
+
+    <a routerLink="/profile">Profile</a>
+
+    <a (click)="signOut()">Sign Out</a>
+
+  </div>
+
+  <!--If not Signed In-->
+  <div *ngIf="!(signInContext$ | async).signedIn">
+
+    <a routerLink="/sign-in">Sign In</a>
+
+  </div>
+
+
+</div>

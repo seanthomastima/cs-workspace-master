@@ -1,0 +1,10 @@
+<div class="row pad-bottom-1em">
+
+  <input type="checkbox"
+         [(ngModel)]="value"
+         (ngModelChange)="valueChanged()"
+         (keydown)="stopEnterEventBubbling($event)">
+
+  <label>{{label}}</label>
+
+</div>

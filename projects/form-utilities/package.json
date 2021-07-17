@@ -1,0 +1,11 @@
+{
+  "name": "form-utilities",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@angular/common": "^9.1.3",
+    "@angular/core": "^9.1.3",
+    "@angular/forms": "^9.1.3",
+    "@angular/material": "9.2.1",
+    "tslib": "^1.11.1"
+  }
+}

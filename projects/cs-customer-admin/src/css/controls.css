@@ -1,0 +1,247 @@
+.button {
+  color: white;
+  background-color: darkgrey;
+  outline: none;
+}
+
+.button + .button {
+  margin: 0 0 0 8px;
+}
+
+.button-plain {
+  color: white;
+  background-color: darkgrey;
+  border: white;
+  padding: 0.5em 1em;
+  outline: none;
+}
+
+.button-plain:hover {
+  color: #818181;
+  background-color: #C4BE10;
+}
+
+.radius-6 {
+  border-radius: 6px;
+}
+
+.radius-left-6 {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.radius-right-6 {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.radius-top-6 {
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.tab-button-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.tab-button {
+  color: white;
+  background-color: gray;
+  margin-right: 2em;
+  padding-right: 2em;
+  padding-left: 2em;
+  border: white;
+  outline: none;
+  font-size: 14px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.tab-button:hover {
+  background-color: #111;
+}
+
+.tab-button-selected {
+  color: black;
+  background-color: lightgray;
+  margin-right: 2em;
+  padding-right: 2em;
+  padding-left: 2em;
+  height: 3em;
+  border: none;
+  outline: none;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.tab-button-selected:focus {outline-color: white;}
+
+.tab-panel-container {
+  color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: lightgray;
+  padding: 0.5em;
+  border-radius: 0 6px 6px 6px;
+}
+
+/* Inputs */
+
+.input {
+  box-sizing: border-box;
+  background-color: cornsilk;
+  border: solid darkblue;
+  border-width: 1px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  padding: 0.25em 0.5em;
+}
+
+.input:focus {
+  border: solid red;
+  background-color: #f8f8f8;
+  border-width: 1px;
+  border-radius: 6px;
+  outline: none;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  padding: 0.25em 0.5em;
+}
+
+/* Label */
+
+.label {
+  box-sizing: border-box;
+  border: solid darkblue;
+  border-width: 1px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  padding: 0.25em 0.5em;
+}
+
+.error {
+  color: red;
+}
+
+.error-container {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1em;
+  border-radius: 6px;
+  border: solid red;
+  border-width: 2px;
+}
+
+.alert-container {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1em;
+  border-radius: 6px;
+  border: solid #C4BE10;
+  border-width: 2px;
+}
+
+
+.panel-container {
+  color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 1em;
+  border-radius: 6px;
+  border: solid darkgrey;
+  border-width: 2px;
+}
+
+/*Lists*/
+
+.item-header {
+  margin-bottom: 0.5em;
+  padding: 1.5em;
+  background-color: white;
+  border-bottom: solid darkgrey;
+  /*border-radius: 7px;*/
+}
+
+.item-header:hover {
+  border-left: 4px solid #C4BE10;
+}
+
+.item-header-selected {
+  margin-bottom: 0.5em;
+  padding: 1.5em;
+  color: black;
+  background-color: white;
+  border: solid #C4BE10;
+  border-width: 3px;
+  border-radius: 7px;
+}
+
+.item-header-small {
+  margin: 0;
+  padding: 0.25em 0em;
+  background-color: white;
+}
+
+.item-header-selected-small {
+  margin: 0;
+  padding: 0.25em 0em;
+  color: white;
+  background-color: #C4BE10;
+}
+
+.item-header-small:hover {
+  border-left: 4px solid #C4BE10;
+}
+
+.item-title {
+  display: flex;
+  justify-content: flex-start;
+  margin:0em 0em 0.2em 0em;
+  padding: 0;
+}
+
+
+.small-text {
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+.virtual-scroll-viewport {
+  border: none;
+}
+
+.link {
+  color: blue;
+}
+
+.link:hover {
+  cursor: pointer;
+  background-color: #C4BE10;
+}
+
+.list-border {
+  border: solid darkgreen;
+  background-color: cornsilk;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 0.25em 0.5em;
+}
+
+hover-highlight {}
+
+.hover-highlight:hover {
+  cursor: pointer;
+  background-color: #C4BE10;
+}
+
+

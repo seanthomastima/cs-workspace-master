@@ -1,0 +1,76 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <div *ngIf="fuService.pageState !== fuService.pageStateOptions.ERROR"
+       class="panel-container column margin-top-1em centre">
+
+    <div class="heading margin-bottom-1em">
+      Customer Details
+    </div>
+
+    <!--Panel Content-->
+    <div class="column margin-top-1em">
+
+      <div class="row">
+
+        <!--Edit controls-->
+        <div class="column width-wide">
+
+          <form autocomplete="off"
+                novalidate
+                [formGroup]="fuService.fg">
+
+            <fu-fg-input
+              [fg]="fuService.fg"
+              [controlName]="'name'"
+              [inputValue]="fuService.item.name"
+              [label]="'Name'">
+            </fu-fg-input>
+
+            <fu-fg-input
+              [fg]="fuService.fg"
+              [controlName]="'description'"
+              [inputValue]="fuService.item.description"
+              [label]="'Description'">
+            </fu-fg-input>
+
+            <fu-fg-input
+              [fg]="fuService.fg"
+              [controlName]="'customerSignInKey'"
+              [inputValue]="fuService.item.customerSignInKey"
+              [label]="'Customer SignIn Key'">
+            </fu-fg-input>
+
+          </form>
+
+        </div>
+
+      </div>
+
+      <!--Error Messages-->
+      <sc-error-message
+        [errorMessages]="fuService.errorMessages">
+      </sc-error-message>
+
+      <!--Buttons-->
+      <fu-fg-buttons-single
+        [fuService]="fuService">
+      </fu-fg-buttons-single>
+
+
+      <!--Waiting spinner-->
+      <sc-waiting-spinner
+        *ngIf="waiting">
+      </sc-waiting-spinner>
+
+    </div>
+
+    <sc-display-message *ngIf="fuService.pageState === fuService.pageStateOptions.EDIT"
+                        [message]="fuService.errorMessages[0]"
+                        [isErrorMessage]="true"
+                        (OK)="removeErrorDisplay()">
+    </sc-display-message>
+
+  </div>
+
+</div>

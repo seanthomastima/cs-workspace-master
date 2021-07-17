@@ -1,0 +1,94 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <!--Header-->
+  <div class="row">
+
+    <fu-heading1
+      [text]="'Super Administrators'">
+    </fu-heading1>
+
+    <!--Buttons-->
+    <div class="flex-end align-items-centre margin-right-2em"
+         *ngIf="displayMode === 'VIEW' && fuService.pageState === fuService.pageStateOptions.VIEW">
+
+      <fu-button
+        [label]="'Add Super Administrator'"
+        (click)="switchLayoutToAddUser()">
+      </fu-button>
+
+    </div>
+
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               [style.height.px]="(windowSize$ | async)?.height * 0.6"
+                               class="virtual-scroll-viewport panel-container margin-right-2em"
+                               *ngIf="displayMode === 'VIEW'">
+
+    <div *cdkVirtualFor="let item of fuService.items"
+         [ngClass]="{'item-header':             fuService.item.FSKey !== item?.FSKey,
+                     'item-header-selected':    fuService.item.FSKey === item?.FSKey}"
+         (click)="edit(item)">
+
+      <fu-heading2
+        [text]="item?.name">
+      </fu-heading2>
+
+      <!--Panel Content-->
+      <div class="column"
+           *ngIf="fuService.panelOpen && fuService.item.FSKey === item?.FSKey">
+
+        <form autocomplete="off"
+              novalidate
+              [formGroup]="fuService.fg">
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [label]="'Name'"
+            [inputValue]="item?.name"
+            [controlName]="'name'">
+          </fu-fg-input>
+
+          <fu-fg-input
+            [fg]="fuService.fg"
+            [label]="'Email Address'"
+            [inputType]="'email'"
+            [inputValue]="item?.emailAddress"
+            [controlName]="'emailAddress'">
+          </fu-fg-input>
+
+        </form>
+
+        <!--Error errorMessages-->
+        <sc-error-message
+          [errorMessages]="fuService.errorMessages">
+        </sc-error-message>
+
+        <!--Buttons-->
+        <div class="row-right">
+
+          <fu-fg-buttons
+            [fuService]="fuService">
+          </fu-fg-buttons>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+  <sc-waiting-spinner *ngIf="loading"></sc-waiting-spinner>
+
+  <add-user
+    *ngIf="displayMode === 'ADD_USER'"
+    [heading]="'Add Super Administrator'"
+    (formValues)="addSuperAdministrator($event)">
+  </add-user>
+
+
+</div>
+
+

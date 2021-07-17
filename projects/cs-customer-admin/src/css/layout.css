@@ -1,0 +1,198 @@
+.flex-container {
+  display: flex;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.row-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.align-items-centre {
+  align-items: center;
+}
+
+.align-content-centre {
+  align-content: center;
+}
+
+.heading {
+  font-size: 25px;
+  color: #C4BE10;
+}
+
+.heading2 {
+  font-size: 20px;
+  color: #C4BE10;
+}
+
+.heading3 {
+  font-size: 16px;
+  color: #C4BE10;
+}
+
+.title-text {
+  display: flex;
+  font-size: large;
+  color: black;
+  font-weight: bold;
+  padding-bottom: 0.5em;
+}
+
+.centre {
+  margin: auto;
+}
+
+.width-5em {
+  width: 5em;
+}
+
+.width-6em {
+  width: 6em;
+}
+
+.width-10em {
+  width: 10em;
+}
+
+.width-12em {
+  width: 12em;
+}
+
+.width-medium {
+  width: 15em;
+}
+
+.height-medium {
+  height: 15em;
+}
+
+.width-wide {
+  width: 25em;
+}
+
+.width-widest {
+  width: 40em;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.pad-1em {
+  padding: 1em;
+}
+
+.pad-0pt5em {
+  padding: 0.5em;
+}
+
+.pad-right-1em {
+  padding-right: 1em;
+}
+
+.pad-right-3em {
+  padding-right: 3em;
+}
+
+.pad-left-1em {
+  padding-left: 1em;
+}
+
+.pad-bottom-1em {
+  padding-bottom: 1em;
+}
+
+.pad-bottom-pt25 {
+  padding-bottom: 0.25em;
+}
+
+.pad-top-1em {
+  padding-top: 1em;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.margin-top-1em {
+  margin-top: 1em;
+}
+
+.margin-top-2em {
+  margin-top: 2em;
+}
+
+.margin-top-0pt5em {
+  margin-top: 0.5em;
+}
+
+.margin-right-0pt5em {
+  margin-right: 0.5em;
+}
+
+.margin-right-1em {
+  margin-right: 1em;
+}
+
+.margin-right-2em {
+  margin-right: 2em;
+}
+
+.margin-left-1em {
+  margin-left: 1em;
+}
+
+.margin-left-2em {
+  margin-left: 2em;
+}
+
+.margin-bottom-1em {
+  margin-bottom: 1em;
+}
+
+.margin-bottom-0pt5em {
+  margin-bottom: 0.5em;
+}
+
+.spacer {
+  flex: 10 1 auto;
+}
+
+.min-height-20px {
+  min-height: 20px;
+}
+
+.background-white {
+  background-color: white;
+}

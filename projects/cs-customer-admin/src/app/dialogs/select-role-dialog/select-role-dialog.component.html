@@ -1,0 +1,53 @@
+<div class="main-div">
+
+  <div class="row-left heading">
+    Select Role
+  </div>
+
+  <!--Filter-->
+  <div class="width-medium margin-bottom-1em margin-top-1em">
+    <div class="column">
+      <label>Filter</label>
+      <input class="input"
+             type="text"
+             placeholder="Enter filter"
+             [(ngModel)]="filter"
+             (ngModelChange)="filterList()">
+    </div>
+  </div>
+
+  <!--Role List-->
+  <cdk-virtual-scroll-viewport itemSize="50"
+                               minBufferPx="200"
+                               maxBufferPx="400"
+                               [style.height.px]="300"
+                               class="virtual-scroll-viewport tab-panel-container">
+
+    <div *cdkVirtualFor="let item of filteredDisplayObjects"
+         [ngClass]="{'item-header-small':           displayObject?.ID !== item.ID,
+                     'item-header-selected-small':  displayObject?.ID === item.ID}"
+         (click)="onClick(item)">
+
+      <a>{{item.recipientName}}</a>
+
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+
+  <!--Buttons-->
+  <div class="row-right margin-top-1em">
+
+    <button class="button-plain radius-6 margin-right-1em"
+            *ngIf="displayObject"
+            (click)="select()">
+      Select
+    </button>
+
+    <button class="button-plain radius-6"
+            (click)="cancel()">
+      Cancel
+    </button>
+
+  </div>
+
+</div>

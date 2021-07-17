@@ -1,0 +1,38 @@
+<div class="column">
+
+  <div *ngIf="includeName">
+
+    <fu-input
+      [label]="'Enter Name'"
+      [value]="recipientName"
+      (changes)="updateName($event)">
+    </fu-input>
+
+  </div>
+
+  <fu-input
+    [label]="'Enter Email Address'"
+    [value]="recipientEmailAddress"
+    [inputType]="'email'"
+    (changes)="updateEmail($event)">
+  </fu-input>
+
+  <sc-error-message
+    [errorMessages]="errorMessages">
+  </sc-error-message>
+
+  <div class="row-right">
+
+    <fu-button
+    [label]="'Cancel'"
+    (click)="cancel()">
+    </fu-button>
+
+    <fu-button
+      [label]="'Send Email'"
+      (click)="sendEmail()">
+    </fu-button>
+
+  </div>
+
+</div>

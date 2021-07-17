@@ -1,0 +1,76 @@
+<div #main
+     class="flex-container column pad-1em">
+
+  <div *ngIf="fuService.pageState !== fuService.pageStateOptions.ERROR && !updatingPassword"
+       class="panel-container column margin-top-1em centre">
+
+      <div class="heading margin-bottom-1em">
+        Profile
+      </div>
+
+    <!--Panel Content-->
+    <div class="column margin-top-1em">
+
+        <!--Edit controls-->
+        <div class="column">
+
+          <form autocomplete="off"
+                novalidate
+                [formGroup]="fuService.fg">
+
+            <fu-fg-input
+              [fg]="fuService.fg"
+              [controlName]="'name'"
+              [label]="'Name'"
+              [inputValue]="fuService.item.name">
+            </fu-fg-input>
+
+            <fu-fg-input
+              [fg]="fuService.fg"
+              [controlName]="'emailAddress'"
+              [inputType]="'email'"
+              [label]="'Email Address'"
+              [inputValue]="fuService.item.emailAddress">
+            </fu-fg-input>
+
+          </form>
+
+        </div>
+
+      <!--Error Messages-->
+      <sc-error-message
+        [errorMessages]="fuService.errorMessages">
+      </sc-error-message>
+
+      <!--Buttons-->
+      <div class="row-right">
+
+        <fu-fg-buttons-single
+          [fuService]="fuService">
+        </fu-fg-buttons-single>
+
+        <button class="button-plain radius-6 margin-right-1em"
+                *ngIf="!fuService.changes"
+                (click)="updatePassword(true)">
+          Update Password
+        </button>
+
+      </div>
+
+    </div>
+
+    <!--Waiting spinner-->
+    <sc-waiting-spinner
+      *ngIf="waiting">
+    </sc-waiting-spinner>
+
+  </div>
+
+  <update-password *ngIf="updatingPassword"
+                   (passwordUpdated)="updatePassword(false)">
+  </update-password>
+
+</div>
+
+
+

@@ -1,0 +1,59 @@
+<div id="main"
+     class="header flex-container">
+
+  <div class="flex-start">
+
+    <fa-icon *ngIf="!displaySideBar"
+             (click)="toggleSideBar()"
+             [icon]="faBars" size="2x"></fa-icon>
+
+  </div>
+
+  <!--Not SignedIn Heading-->
+  <div class="flex-end align-items-centre">
+    Application
+  </div>
+
+  <!--SignedIn Heading-->
+  <div *ngIf="(signInContext$ | async).signedIn"
+       class="flex-end align-items-centre">
+
+    <span>
+      {{(signInContext$ | async).customer?.name}}
+    </span>
+
+    <span class="margin-left-1em">
+      {{(signInContext$ | async).user.name}}
+    </span>
+
+  </div>
+
+</div>
+
+<!--Sidebar-->
+<div id="mySidebar" class="sidebar">
+
+  <!--If Signed In-->
+  <div *ngIf="(signInContext$ | async).signedIn">
+
+    <a *ngIf="(signInContext$ | async).signedIn"
+       class="closeButton"
+       (click)="toggleSideBar()">×</a>
+
+    <a routerLink="/manage-checklists">My Checklists</a>
+
+    <a routerLink="/profile">Profile</a>
+
+    <a (click)="signOut()">Sign Out</a>
+
+  </div>
+
+  <!--If not Signed In-->
+  <div *ngIf="!(signInContext$ | async).signedIn">
+
+    <a (click)="signIn()">Sign In</a>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "cs-customer-admin",
+    "public": "dist/cs-customer-admin",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
